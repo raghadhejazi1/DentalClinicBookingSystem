@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\User;
 use App\Models\Service;
 use App\Models\Appointment;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class BookAppointment extends Component
@@ -17,44 +18,58 @@ class BookAppointment extends Component
     public $appointment_time;
     public $notes;
 
-    // Validation Rules
-    protected $rules = [
-        'doctor_id' => 'required',
-        'service_id' => 'required',
-        'appointment_date' => 'required|date|after_or_equal:today',
-        'appointment_time' => 'required',
-        'notes' => 'nullable|string|max:500',
-    ];
-
     // Method executed on form submit
-   public function save()
-{
-    $this->validate();
+    public function save()
+    {
+        if (!Auth::check()) {
+            session()->flash('error', 'You must be logged in to book an appointment.');
+            return redirect()->route('login');
+        }
 
-    Appointment::create([
-        'patient_id'       => Auth::id(),
-        'doctor_id'        => $this->doctor_id,
-        'service_id'       => $this->service_id,
-        'appointment_date' => $this->appointment_date,
-        'appointment_time' => $this->appointment_time, // 👈 تم إرسال الحقل منفصلاً هنا
-        'notes'            => $this->notes,
-        'status'           => 'pending',
-    ]);
+        $this->validate([
+            'doctor_id'        => 'required|exists:users,id',
+            'service_id'       => 'required|exists:services,id',
+            'appointment_date' => 'required|date',
+            'appointment_time' => 'required',
+        ]);
 
-    session()->flash('message', 'Appointment request submitted successfully!');
+        // تحويل صيغة الوقت من (11:00 AM) إلى (11:00:00) المقبولة في MySQL
+        $formattedTime = Carbon::createFromFormat('g:i A', $this->appointment_time)->format('H:i:s');
 
-    $this->reset(['doctor_id', 'service_id', 'appointment_date', 'appointment_time', 'notes']);
-}
+        Appointment::create([
+            'patient_id'       => Auth::id(),
+            'doctor_id'        => $this->doctor_id,
+            'service_id'       => $this->service_id,
+            'appointment_date' => $this->appointment_date,
+            'appointment_time' => $formattedTime,
+            'notes'            => $this->notes,
+            'status'           => 'pending',
+        ]);
+
+        $this->reset(['doctor_id', 'service_id', 'appointment_date', 'appointment_time', 'notes']);
+
+        session()->flash('success', 'Appointment booked successfully!');
+    }
 
     public function render()
     {
-        // Fetch doctors and services
-        $doctors = User::role('doctor')->get();
+        $doctors = User::role('doctor')
+            ->whereDoesntHave('roles', function ($query) {
+                $query->where('name', 'admin');
+            })
+            ->get();
+
         $services = Service::all();
 
+        $timeSlots = [
+            '09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
+            '01:00 PM', '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM',
+        ];
+
         return view('livewire.book-appointment', [
-            'doctors' => $doctors,
-            'services' => $services,
+            'doctors'   => $doctors,
+            'services'  => $services,
+            'timeSlots' => $timeSlots,
         ]);
     }
 }

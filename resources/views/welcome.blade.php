@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-
 <html class="scroll-smooth" lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>DentistPro | Modern Dental Care</title>
+    
+    <!-- Scripts & Styles -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -79,46 +80,22 @@
                         "unit": "4px"
                     },
                     "fontFamily": {
-                        "body-md": ["Inter"],
-                        "headline-sm": ["Inter"],
-                        "label-sm": ["Inter"],
-                        "label-md": ["Inter"],
-                        "headline-md": ["Inter"],
-                        "display-lg": ["Inter"],
-                        "body-lg": ["Inter"]
+                        "body-md": ["Inter", "sans-serif"],
+                        "headline-sm": ["Inter", "sans-serif"],
+                        "label-sm": ["Inter", "sans-serif"],
+                        "label-md": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "display-lg": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"]
                     },
                     "fontSize": {
-                        "body-md": ["14px", {
-                            "lineHeight": "20px",
-                            "fontWeight": "400"
-                        }],
-                        "headline-sm": ["20px", {
-                            "lineHeight": "28px",
-                            "fontWeight": "600"
-                        }],
-                        "label-sm": ["11px", {
-                            "lineHeight": "14px",
-                            "fontWeight": "500"
-                        }],
-                        "label-md": ["12px", {
-                            "lineHeight": "16px",
-                            "letterSpacing": "0.05em",
-                            "fontWeight": "600"
-                        }],
-                        "headline-md": ["24px", {
-                            "lineHeight": "32px",
-                            "letterSpacing": "-0.01em",
-                            "fontWeight": "600"
-                        }],
-                        "display-lg": ["32px", {
-                            "lineHeight": "40px",
-                            "letterSpacing": "-0.02em",
-                            "fontWeight": "700"
-                        }],
-                        "body-lg": ["16px", {
-                            "lineHeight": "24px",
-                            "fontWeight": "400"
-                        }]
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
                     }
                 },
             },
@@ -135,13 +112,7 @@
         }
 
         .soft-shadow {
-            shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-        }
-
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 24px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .glass-card {
@@ -161,49 +132,46 @@
             </div>
             <span class="font-headline-sm text-headline-sm font-bold text-primary">DentistPro</span>
         </div>
+        
         <nav class="hidden md:flex items-center gap-stack-lg">
             <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#services">Services</a>
             <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#about">About Us</a>
             <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#contact">Contact</a>
+            
             <div class="flex items-center space-x-4 rtl:space-x-reverse">
                 @if (Route::has('login'))
-                @auth
-                <!-- إذا كان المستخدم مسجل دخوله بالفعل -->
-                <a href="{{ url('/dashboard') }}"
-                    class="text-sm font-semibold text-gray-700 hover:text-blue-600 transition-colors">
-                    Dashboard
-                </a>
-                @else
-                <!-- زر تسجيل الدخول -->
-                <a href="{{ route('login') }}"
-                    class="text-sm font-semibold text-gray-700 hover:text-blue-600 transition-colors">
-                    Log in
-                </a>
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="text-sm font-semibold text-gray-700 hover:text-blue-600 transition-colors">
+                            Dashboard
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}" class="text-sm font-semibold text-gray-700 hover:text-blue-600 transition-colors">
+                            Log in
+                        </a>
 
-                <!-- زر إنشاء حساب جديد -->
-                @if (Route::has('register'))
-                <a href="{{ route('register') }}"
-                    class="text-sm font-semibold text-gray-700 hover:text-blue-600 transition-colors">
-                    Register
-                </a>
-                @endif
-                @endauth
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="text-sm font-semibold text-gray-700 hover:text-blue-600 transition-colors">
+                                Register
+                            </a>
+                        @endif
+                    @endauth
                 @endif
             </div>
         </nav>
+
         <div class="flex items-center gap-stack-md">
-            <button class="hidden sm:flex items-center gap-2 px-6 py-2.5 bg-primary-container text-on-primary-container rounded-full font-label-md text-label-md font-bold hover:opacity-90 active:scale-[0.98] transition-all">
+            <a href="{{ route('appointments.create') }}" class="hidden sm:flex items-center gap-2 px-6 py-2.5 bg-primary-container text-on-primary-container rounded-full font-label-md text-label-md font-bold hover:opacity-90 active:scale-[0.98] transition-all">
                 Book Appointment
-            </button>
-            <button class="md:hidden p-2 text-on-surface-variant">
+            </a>
+            <button class="md:hidden p-2 text-on-surface-variant" aria-label="Toggle Menu">
                 <span class="material-symbols-outlined">menu</span>
             </button>
         </div>
     </header>
+
     <main class="pt-16">
         <!-- Hero Section -->
         <section class="relative min-h-[921px] flex items-center overflow-hidden bg-surface">
-            <!-- Asymmetric Background Shape -->
             <div class="absolute top-0 right-0 w-2/3 h-full bg-primary/5 rounded-bl-[200px] -z-10"></div>
             <div class="max-w-[1440px] mx-auto px-container-padding w-full grid grid-cols-1 lg:grid-cols-2 gap-stack-lg items-center">
                 <div class="space-y-stack-lg animate-in fade-in slide-in-from-left duration-1000">
@@ -227,15 +195,15 @@
                         </button>
                     </div>
                     <div class="flex items-center gap-4 pt-8">
-                        <div class="flex -space-x-3">
+                        <div class="flex -space-x-3 rtl:space-x-reverse">
                             <div class="w-10 h-10 rounded-full border-2 border-surface overflow-hidden">
-                                <img class="w-full h-full object-cover" data-alt="A portrait of a smiling female dentist in professional clinical attire, bright and airy lighting, healthcare professional photography style, soft neutral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6Ck47azxpviO4NGWjE7R7jel2YGcwZXm9WlutoWC_1-KEGep85N4Ppa9P44Mv6bZl0gyUheYT2H4ZeAaoxcSxF0Pq72lBOUpPOObeyP701ZnDXz6WfNvfBUJMzrZRNVdl2UmJNDxu2i2cyR6Iy6dKwxYzrmlO_pzObu9lRDxbxmKRZOTZjJg3q5my_a0dgb-UXNujZ4y9aqQd90t8kMfQjVhLYUavgCJ_eDWmhHa1WXHRnyqbMSJx6vIayyfXJKPjita6AL4VkP0e" />
+                                <img class="w-full h-full object-cover" alt="Smiling female dentist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6Ck47azxpviO4NGWjE7R7jel2YGcwZXm9WlutoWC_1-KEGep85N4Ppa9P44Mv6bZl0gyUheYT2H4ZeAaoxcSxF0Pq72lBOUpPOObeyP701ZnDXz6WfNvfBUJMzrZRNVdl2UmJNDxu2i2cyR6Iy6dKwxYzrmlO_pzObu9lRDxbxmKRZOTZjJg3q5my_a0dgb-UXNujZ4y9aqQd90t8kMfQjVhLYUavgCJ_eDWmhHa1WXHRnyqbMSJx6vIayyfXJKPjita6AL4VkP0e" />
                             </div>
                             <div class="w-10 h-10 rounded-full border-2 border-surface overflow-hidden">
-                                <img class="w-full h-full object-cover" data-alt="A portrait of a male dental surgeon in blue scrubs, smiling warmly, professional medical headshot, clean clinical aesthetic with soft focus background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKRiTMSCrikubk7qOViszAl0pI5ARDaYmElHS7C_taOT2gEodwbBRP8zSbrQYLMyMecbwjfGAIF7pDyQVahgPMqZGJ3wXMbbH0auGh-cbMkoqaj79SHl3fqpKr6WHvupN6PpPLv7gVgjIEbW0uBD9cEek8_QhG4-H1D1-UHc_kd5mP4xekRCA4IXGdyZ8iMlQdxVeZpDZaQIV_xNaHSVuifyduAH0XsYtmQO4YIGX9xt1R1nU9DzSTAFphO2SivElJA84UIOI_YaDv" />
+                                <img class="w-full h-full object-cover" alt="Male dental surgeon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKRiTMSCrikubk7qOViszAl0pI5ARDaYmElHS7C_taOT2gEodwbBRP8zSbrQYLMyMecbwjfGAIF7pDyQVahgPMqZGJ3wXMbbH0auGh-cbMkoqaj79SHl3fqpKr6WHvupN6PpPLv7gVgjIEbW0uBD9cEek8_QhG4-H1D1-UHc_kd5mP4xekRCA4IXGdyZ8iMlQdxVeZpDZaQIV_xNaHSVuifyduAH0XsYtmQO4YIGX9xt1R1nU9DzSTAFphO2SivElJA84UIOI_YaDv" />
                             </div>
                             <div class="w-10 h-10 rounded-full border-2 border-surface overflow-hidden">
-                                <img class="w-full h-full object-cover" data-alt="A portrait of a dental hygienist smiling, wearing medical uniform, bright high-key lighting, professional healthcare atmosphere, minimal dental clinic background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCt6Ra0k_cCoHRvFKFWxL0V-ujJuQlnp2Q7gmRWeTZZfEn-gakXiZ_pafmuzwr5pB3Qg3gaoB8PSUjUVV_uu0kYQikRVkIQ3fRZOUJcV-ZBCgT4eyjNivYm_GMgiWXW0zfnEyMgNBaN6bvuQer3gfTEuHYe-jgxaNE-cIqQZY4xa3gkwqRucFt-rKfek1m8pJxgSdtJMZT1zgwcy7seGH9Oww2TYrkAsDkKPd3CjmJR_cNqcFXf39dJ2mOuBFrV3_sO5Qwz58DF_7Sn" />
+                                <img class="w-full h-full object-cover" alt="Dental hygienist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCt6Ra0k_cCoHRvFKFWxL0V-ujJuQlnp2Q7gmRWeTZZfEn-gakXiZ_pafmuzwr5pB3Qg3gaoB8PSUjUVV_uu0kYQikRVkIQ3fRZOUJcV-ZBCgT4eyjNivYm_GMgiWXW0zfnEyMgNBaN6bvuQer3gfTEuHYe-jgxaNE-cIqQZY4xa3gkwqRucFt-rKfek1m8pJxgSdtJMZT1zgwcy7seGH9Oww2TYrkAsDkKPd3CjmJR_cNqcFXf39dJ2mOuBFrV3_sO5Qwz58DF_7Sn" />
                             </div>
                         </div>
                         <p class="font-label-sm text-label-sm text-on-surface-variant">
@@ -243,12 +211,12 @@
                         </p>
                     </div>
                 </div>
+                
                 <div class="relative hidden lg:block animate-in fade-in zoom-in duration-1000 delay-200">
                     <div class="relative w-full aspect-square rounded-[40px] overflow-hidden shadow-2xl">
-                        <img class="w-full h-full object-cover" data-alt="A wide-angle shot of a state-of-the-art modern dental clinic interior. Minimalist design with white walls, ergonomic dental chair in soft blue, large windows with natural sunlight, and organized professional equipment. The mood is calm, sterile, and premium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHcst_epXulWEDpjVvibqtCmPiMQXNtv3zHBMb3dDkWhRyvSKiGMi6F0G2Cm55nO8v9xtHxFERUSs5Hn20u9V3Eie9K15iKHrORVOqwMEnMmicIv5-hZbHrLcqHArALWxEhj8h83lwKlIdDqWHTWnAmlSHrVeHmhhXG0DHHXhXNG6X4N_cyxlaQxgIK4Crd4AxnVfZKxHIEiu3wsf7jpbAafmlJosqlswC-MxMfzQLHkL_-bOa7Q3QvlBh4W8Hgc_l_ijP6J4SnzUM" />
+                        <img class="w-full h-full object-cover" alt="State-of-the-art dental clinic interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHcst_epXulWEDpjVvibqtCmPiMQXNtv3zHBMb3dDkWhRyvSKiGMi6F0G2Cm55nO8v9xtHxFERUSs5Hn20u9V3Eie9K15iKHrORVOqwMEnMmicIv5-hZbHrLcqHArALWxEhj8h83lwKlIdDqWHTWnAmlSHrVeHmhhXG0DHHXhXNG6X4N_cyxlaQxgIK4Crd4AxnVfZKxHIEiu3wsf7jpbAafmlJosqlswC-MxMfzQLHkL_-bOa7Q3QvlBh4W8Hgc_l_ijP6J4SnzUM" />
                     </div>
-                    <!-- Floating Stat Card -->
-                    <div class="absolute -bottom-8 -left-8 glass-card p-6 rounded-2xl shadow-[0px_12px_24px_rgba(0,0,0,0.08)] animate-bounce-slow">
+                    <div class="absolute -bottom-8 -left-8 glass-card p-6 rounded-2xl shadow-[0px_12px_24px_rgba(0,0,0,0.08)]">
                         <div class="flex items-center gap-4">
                             <div class="w-12 h-12 bg-tertiary-container text-on-tertiary-container rounded-full flex items-center justify-center">
                                 <span class="material-symbols-outlined">sentiment_very_satisfied</span>
@@ -262,13 +230,15 @@
                 </div>
             </div>
         </section>
-        <!-- Services Section: Bento-inspired cards -->
+
+        <!-- Services Section -->
         <section class="py-stack-lg bg-surface" id="services">
             <div class="max-w-[1440px] mx-auto px-container-padding">
                 <div class="flex flex-col items-center text-center mb-16 space-y-4">
                     <h2 class="font-display-lg text-display-lg text-primary">Our Specialized Services</h2>
                     <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Comprehensive dental solutions tailored to your unique needs using the latest medical technologies.</p>
                 </div>
+                
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Teeth Whitening -->
                     <div class="group p-8 bg-surface-container-lowest rounded-[32px] border border-outline-variant hover:border-primary-container hover:shadow-xl transition-all duration-300">
@@ -283,6 +253,7 @@
                             Learn more <span class="material-symbols-outlined text-[18px]">arrow_right_alt</span>
                         </a>
                     </div>
+                    
                     <!-- Dental Implants -->
                     <div class="group p-8 bg-surface-container-lowest rounded-[32px] border border-outline-variant hover:border-primary-container hover:shadow-xl transition-all duration-300">
                         <div class="w-16 h-16 bg-primary-container/10 text-primary rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
@@ -296,6 +267,7 @@
                             Learn more <span class="material-symbols-outlined text-[18px]">arrow_right_alt</span>
                         </a>
                     </div>
+                    
                     <!-- Root Canal Therapy -->
                     <div class="group p-8 bg-surface-container-lowest rounded-[32px] border border-outline-variant hover:border-primary-container hover:shadow-xl transition-all duration-300">
                         <div class="w-16 h-16 bg-primary-container/10 text-primary rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
@@ -312,15 +284,15 @@
                 </div>
             </div>
         </section>
-        <!-- Asymmetric Promotional Banner -->
+
+        <!-- Promotional Banner -->
         <section class="py-stack-lg overflow-hidden">
             <div class="max-w-[1440px] mx-auto px-container-padding">
                 <div class="relative bg-primary-container rounded-[40px] p-12 lg:p-24 overflow-hidden flex flex-col lg:flex-row items-center gap-12">
-                    <!-- Background texture -->
                     <div class="absolute inset-0 opacity-10 pointer-events-none">
                         <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
                             <defs>
-                                <pattern height="40" id="dots" patternunits="userSpaceOnUse" width="40" x="0" y="0">
+                                <pattern height="40" id="dots" patternUnits="userSpaceOnUse" width="40" x="0" y="0">
                                     <circle cx="2" cy="2" fill="#fff" r="2"></circle>
                                 </pattern>
                             </defs>
@@ -338,12 +310,13 @@
                     </div>
                     <div class="z-10 flex-1 relative flex justify-center">
                         <div class="relative w-64 h-64 lg:w-96 lg:h-96 rounded-full border-8 border-white/20 overflow-hidden">
-                            <img class="w-full h-full object-cover" data-alt="Close up high-detail macro shot of a perfectly white and healthy set of teeth smiling. Clean, hygienic, healthcare aesthetics with bright studio lighting. Focus on the radiance and professional dental results." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMivEh7tkfKp8zsO-A6i8leLLgvJfjHaWhmh50M1Nxfya9HMHft-H6OsBkw1AbvF2v8tlOp-HnNpkFEYwdkELOiaUTXamWPeurvccQ225oHtSHqlw5DL-FxzmN6mOrMwqAs9Ggr749U0ZK1wvNFHxBIOjLH6VWrDJN94UP8hLYpyydUlPxXnjrfVcr5XYZ29SVZq6oGQoSNH1Hx-atEd-Ga85ZTC64GLPZdqLk5UMIOx_LKught5bTyTt90oI-GuEJPGB6S3CBtIZL" />
+                            <img class="w-full h-full object-cover" alt="Healthy white smile close-up" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMivEh7tkfKp8zsO-A6i8leLLgvJfjHaWhmh50M1Nxfya9HMHft-H6OsBkw1AbvF2v8tlOp-HnNpkFEYwdkELOiaUTXamWPeurvccQ225oHtSHqlw5DL-FxzmN6mOrMwqAs9Ggr749U0ZK1wvNFHxBIOjLH6VWrDJN94UP8hLYpyydUlPxXnjrfVcr5XYZ29SVZq6oGQoSNH1Hx-atEd-Ga85ZTC64GLPZdqLk5UMIOx_LKught5bTyTt90oI-GuEJPGB6S3CBtIZL" />
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
         <!-- CTA Section -->
         <section class="py-stack-lg bg-surface" id="contact">
             <div class="max-w-4xl mx-auto px-container-padding text-center">
@@ -367,6 +340,7 @@
             </div>
         </section>
     </main>
+
     <!-- Footer -->
     <footer class="bg-surface-container-low border-t border-outline-variant py-stack-lg">
         <div class="max-w-[1440px] mx-auto px-container-padding">
@@ -380,39 +354,41 @@
                         Providing professional, compassionate dental care since 2012. Our mission is to make oral health accessible and stress-free.
                     </p>
                 </div>
+                
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-12">
                     <div class="space-y-4">
                         <h4 class="font-label-md text-label-md text-on-surface font-bold uppercase">Quick Links</h4>
                         <ul class="space-y-2 font-label-md text-label-md text-on-surface-variant">
-                            <li><a class="hover:text-primary" href="#">Services</a></li>
-                            <li><a class="hover:text-primary" href="#">About Us</a></li>
-                            <li><a class="hover:text-primary" href="#">Our Specialists</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Services</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Our Specialists</a></li>
                         </ul>
                     </div>
                     <div class="space-y-4">
                         <h4 class="font-label-md text-label-md text-on-surface font-bold uppercase">Legal</h4>
                         <ul class="space-y-2 font-label-md text-label-md text-on-surface-variant">
-                            <li><a class="hover:text-primary" href="#">Privacy Policy</a></li>
-                            <li><a class="hover:text-primary" href="#">Terms of Service</a></li>
-                            <li><a class="hover:text-primary" href="#">Cookie Policy</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
                         </ul>
                     </div>
                     <div class="space-y-4">
                         <h4 class="font-label-md text-label-md text-on-surface font-bold uppercase">Connect</h4>
                         <div class="flex gap-4">
-                            <a class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-white transition-colors" href="#">
+                            <a class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-white transition-colors" href="#" aria-label="Website">
                                 <span class="material-symbols-outlined">public</span>
                             </a>
-                            <a class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-white transition-colors" href="#">
+                            <a class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-white transition-colors" href="#" aria-label="Email">
                                 <span class="material-symbols-outlined">alternate_email</span>
                             </a>
-                            <a class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-white transition-colors" href="#">
+                            <a class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-white transition-colors" href="#" aria-label="Share">
                                 <span class="material-symbols-outlined">share</span>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="pt-8 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="font-label-sm text-label-sm text-on-surface-variant">
                     © 2024 DentistPro Management System. All rights reserved.
@@ -430,8 +406,9 @@
             </div>
         </div>
     </footer>
+
     <script>
-        // Simple scroll reveal interaction
+        // Scroll reveal interaction
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = {
                 threshold: 0.1

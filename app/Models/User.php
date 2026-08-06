@@ -72,4 +72,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Appointment::class, 'doctor_id');
     }
+
+    
+public function scopeDoctorsOnly($query)
+{
+    return $query->role('doctor')->whereDoesntHave('roles', function ($q) {
+        $q->where('name', 'admin');
+    });
+}
 }

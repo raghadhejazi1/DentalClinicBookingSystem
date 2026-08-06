@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\BookAppointment;
 use App\Models\Appointment;
 use App\Models\Service;
 use App\Models\User;
@@ -66,4 +67,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/book-appointment', BookAppointment::class)->name('appointments.create');
 require __DIR__ . '/auth.php';
