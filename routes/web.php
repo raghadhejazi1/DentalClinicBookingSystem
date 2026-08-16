@@ -69,3 +69,4 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/book-appointment', BookAppointment::class)->name('appointments.create');
 require __DIR__ . '/auth.php';
+Route::get('/doctor/dashboard', [AppointmentController::class, 'index'])->middleware(['auth'])->name('doctor.dashboard');
